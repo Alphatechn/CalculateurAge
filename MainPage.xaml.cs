@@ -1,4 +1,6 @@
 ﻿
+using CalculateurAge.Views;
+
 namespace CalculateurAge
 {
     public partial class MainPage : ContentPage
@@ -9,7 +11,7 @@ namespace CalculateurAge
             InitializeComponent();
         }
 
-        private void OnCalculerClicked(object sender, EventArgs e)
+        private async void OnCalculerClicked(object sender, EventArgs e)
         {
             if(string.IsNullOrWhiteSpace(entryNom.Text))
             {
@@ -21,8 +23,7 @@ namespace CalculateurAge
             int age = DateTime.Today.Year - d.Year;
 
             if (d.Date > DateTime.Today.AddYears(-age)) age--;
-            lblResultat.Text = $"{entryNom.Text}, vous avez {age} ans.";
-            lblResultat.IsVisible = true;
+            await Shell.Current.GoToAsync($"{nameof(Views.ResultatPage)}?nom={entryNom.Text}&age={age}");
         }
     }
 
