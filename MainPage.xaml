@@ -2,19 +2,44 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CalculateurAge.MainPage"
-             Title="Calculateur d'âge">
+             Title="Calculateur">
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="12">
             <Label Text="Nom" FontSize="16"/>
             <Entry Text="{Binding Nom, Mode=TwoWay}"
-           Placeholder="Votre nom"/>
+             Placeholder="Votre nom"/>
+
             <Label Text="Date de naissance" FontSize="16"/>
             <DatePicker Date="{Binding DateNaissance, Mode=TwoWay}"/>
+
             <Button Text="Calculer"
-            Command="{Binding CalculerCommand}"/>
+              Command="{Binding CalculerCommand}"/>
+            <Button Text="Effacer"
+              Command="{Binding EffacerCommand}"/>
+
             <Label Text="{Binding Resultat}" FontSize="20"
-           IsVisible="{Binding ResultatVisible}"/>
+             IsVisible="{Binding ResultatVisible}"/>
+            <Label Text="{Binding Message}" FontSize="18" FontAttributes="Bold"
+             IsVisible="{Binding ResultatVisible}"/>
+            <Label Text="{Binding Signe}" FontSize="18" FontAttributes="Bold"
+             IsVisible="{Binding ResultatVisible}"/>
+            <Label Text="{Binding Generation}" FontSize="18" FontAttributes="Bold"
+             IsVisible="{Binding ResultatVisible}"/>
+            <Label Text="{Binding Anniversaire}" FontSize="16"
+             IsVisible="{Binding ResultatVisible}"/>
+
+            <Label Text="Historique" FontSize="18" FontAttributes="Bold"/>
+            <VerticalStackLayout Spacing="4"
+                           BindableLayout.ItemsSource="{Binding Historique}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <Label Text="{Binding .}" FontSize="14"/>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </VerticalStackLayout>
+            <Button Text="Vider l'historique"
+              Command="{Binding ViderHistoriqueCommand}"/>
         </VerticalStackLayout>
     </ScrollView>
 
